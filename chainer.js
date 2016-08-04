@@ -44,6 +44,14 @@ var CallbackChainer = (function () {
         (this._callbacks.shift() || this.noop)(arg);
     };
 
+    // To be used in a context outside 'this'
+    CallbackChainer.prototype.resolve = function() {
+        var that = this;
+        return function(arg) {
+            (that._callbacks.shift() || that.noop)(arg);
+        };
+    };
+
     CallbackChainer.prototype.getLength = function() {
         return this._callbacks.length;
     };
