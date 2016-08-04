@@ -35,6 +35,11 @@ var CallbackChainer = (function () {
         return this;
     };
 
+    CallbackChainer.prototype.prepend = function(call) {
+        this._callbacks.unshift(call);
+        return this;
+    };
+
     CallbackChainer.prototype.next = function(arg) {
         (this._callbacks.shift() || this.noop)(arg);
     };
